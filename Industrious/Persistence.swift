@@ -20,6 +20,9 @@ struct PersistenceController {
             session.start = Date()
             session.end = Date()
             session.activityType = .study
+            session.isCreditHour = false
+            session.companion = .solo
+            session.notes = ""
         }
         do {
             try viewContext.save()

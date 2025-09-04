@@ -18,6 +18,9 @@ struct MigrationHelper {
                 session.end = now
             }
             session.activityType = .study
+            session.isCreditHour = false
+            session.companion = .solo
+            session.notes = nil
             context.delete(item)
         }
         try context.save()

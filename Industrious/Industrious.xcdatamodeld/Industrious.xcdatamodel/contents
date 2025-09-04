@@ -8,6 +8,9 @@
         <attribute name="start" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="end" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="activityTypeRaw" optional="NO" attributeType="String" usesScalarValueType="NO"/>
+        <attribute name="isCreditHour" optional="NO" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="companionRaw" optional="NO" attributeType="String" usesScalarValueType="NO"/>
+        <attribute name="notes" optional="YES" attributeType="String" usesScalarValueType="NO"/>
         <relationship name="study" optional="YES" toMany="NO" deletionRule="Nullify" destinationEntity="Study" inverseName="sessions" inverseEntity="Study"/>
     </entity>
     <entity name="CounterEntry" representedClassName="CounterEntry" syncable="YES" codeGenerationType="class">

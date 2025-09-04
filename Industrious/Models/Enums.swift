@@ -13,3 +13,9 @@ enum CounterKind: String, CaseIterable, Codable {
     case goal
 }
 
+enum CompanionType: String, CaseIterable, Codable {
+    case solo
+    case friend
+    case group
+}
+
