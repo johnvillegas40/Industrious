@@ -15,8 +15,11 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let session = Session(context: viewContext)
+            session.id = UUID()
+            session.start = Date()
+            session.end = Date()
+            session.activityType = .study
         }
         do {
             try viewContext.save()
@@ -52,5 +55,6 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        try? MigrationHelper.migrateLegacyItems(context: container.viewContext)
     }
 }
