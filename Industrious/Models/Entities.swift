@@ -7,11 +7,19 @@ public class Session: NSManagedObject {
     @NSManaged public var start: Date
     @NSManaged public var end: Date
     @NSManaged public var activityTypeRaw: String
+    @NSManaged public var isCreditHour: Bool
+    @NSManaged public var companionRaw: String
+    @NSManaged public var notes: String?
     @NSManaged public var study: Study?
 
     public var activityType: ActivityType {
         get { ActivityType(rawValue: activityTypeRaw) ?? .study }
         set { activityTypeRaw = newValue.rawValue }
+    }
+
+    public var companion: CompanionType {
+        get { CompanionType(rawValue: companionRaw) ?? .solo }
+        set { companionRaw = newValue.rawValue }
     }
 }
 

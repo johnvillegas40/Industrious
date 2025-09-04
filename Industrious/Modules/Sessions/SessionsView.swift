@@ -1,13 +1,21 @@
 import SwiftUI
 
 struct SessionsView: View {
+    @State private var showingStart = false
+
     var body: some View {
-        Text("Sessions")
-            .font(Typography.heading())
-            .foregroundStyle(AppColor.textPrimary)
-            .padding(Spacing.m)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(AppColor.background)
+        VStack {
+            Button("Start Session") { showingStart = true }
+                .font(Typography.heading())
+                .foregroundStyle(AppColor.textPrimary)
+                .padding(Spacing.m)
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(AppColor.background)
+        .sheet(isPresented: $showingStart) {
+            StartSessionView()
+        }
     }
 }
 
