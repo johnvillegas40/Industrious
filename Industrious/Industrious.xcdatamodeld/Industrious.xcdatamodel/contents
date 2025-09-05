@@ -11,6 +11,8 @@
         <attribute name="isCreditHour" optional="NO" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="companionRaw" optional="NO" attributeType="String" usesScalarValueType="NO"/>
         <attribute name="notes" optional="YES" attributeType="String" usesScalarValueType="NO"/>
+        <attribute name="creditMinutes" optional="NO" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="assignmentTag" optional="YES" attributeType="String" usesScalarValueType="NO"/>
         <relationship name="study" optional="YES" toMany="NO" deletionRule="Nullify" destinationEntity="Study" inverseName="sessions" inverseEntity="Study"/>
     </entity>
     <entity name="CounterEntry" representedClassName="CounterEntry" syncable="YES" codeGenerationType="class">
@@ -27,6 +29,7 @@
     <entity name="DayOff" representedClassName="DayOff" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="date" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isConvention" optional="NO" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>

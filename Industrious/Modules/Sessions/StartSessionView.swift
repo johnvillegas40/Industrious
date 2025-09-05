@@ -6,19 +6,45 @@ struct StartSessionView: View {
 
     var body: some View {
         VStack(spacing: Spacing.l) {
-            HStack(spacing: Spacing.l) {
-                Button(action: { if viewModel.counter > 0 { viewModel.counter -= 1 } }) {
-                    Image(systemName: "minus.circle.fill")
-                        .font(.largeTitle)
-                }
-                Text("\(viewModel.counter)")
-                    .font(Typography.heading(36))
-                Button(action: { viewModel.counter += 1 }) {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.largeTitle)
+            Picker("Role", selection: $viewModel.selectedRole) {
+                ForEach(Role.allCases, id: \.self) { role in
+                    Text(role.displayName).tag(role)
                 }
             }
-            .padding(Spacing.m)
+            .pickerStyle(.segmented)
+            .padding(.horizontal, Spacing.m)
+
+            if viewModel.selectedRole.allowsCredit {
+                Toggle("Credit Hour", isOn: $viewModel.isCreditHour)
+                    .padding(.horizontal, Spacing.m)
+
+                if viewModel.isCreditHour {
+                    HStack(spacing: Spacing.l) {
+                        Button(action: { if viewModel.counter > 0 { viewModel.counter -= 1 } }) {
+                            Image(systemName: "minus.circle.fill")
+                                .font(.largeTitle)
+                        }
+                        Text("\(viewModel.counter)")
+                            .font(Typography.heading(36))
+                        Button(action: { viewModel.counter += 1 }) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.largeTitle)
+                        }
+                    }
+                    .padding(Spacing.m)
+
+                    if viewModel.counter > viewModel.selectedRole.creditAllowance {
+                        Text("Credit minutes exceed allowance")
+                            .font(Typography.caption())
+                            .foregroundColor(.orange)
+                            .padding(.horizontal, Spacing.m)
+                    }
+
+                    TextField("Assignment Tag", text: $viewModel.assignmentTag)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal, Spacing.m)
+                }
+            }
 
             HStack {
                 ForEach(ActivityType.allCases, id: \.self) { type in
@@ -32,9 +58,6 @@ struct StartSessionView: View {
                         .onTapGesture { viewModel.selectedActivity = type }
                 }
             }
-
-            Toggle("Credit Hour", isOn: $viewModel.isCreditHour)
-                .padding(.horizontal, Spacing.m)
 
             Picker("Companion", selection: $viewModel.selectedCompanion) {
                 ForEach(CompanionType.allCases, id: \.self) { companion in

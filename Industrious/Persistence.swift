@@ -23,6 +23,8 @@ struct PersistenceController {
             session.isCreditHour = false
             session.companion = .solo
             session.notes = ""
+            session.creditMinutes = 0
+            session.assignmentTag = nil
         }
         do {
             try viewContext.save()

@@ -21,6 +21,8 @@ struct MigrationHelper {
             session.isCreditHour = false
             session.companion = .solo
             session.notes = nil
+            session.creditMinutes = 0
+            session.assignmentTag = nil
             context.delete(item)
         }
         try context.save()

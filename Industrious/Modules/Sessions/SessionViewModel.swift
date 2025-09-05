@@ -5,8 +5,10 @@ import CoreData
 class SessionViewModel: ObservableObject {
     @Published var selectedActivity: ActivityType = .study
     @Published var isCreditHour: Bool = false
+    @Published var selectedRole: Role = .publisher
     @Published var selectedCompanion: CompanionType = .solo
     @Published var notes: String = ""
+    @Published var assignmentTag: String = ""
     @Published var elapsed: TimeInterval = 0
     @Published var isRunning: Bool = false
     @Published var counter: Int = 0
@@ -36,6 +38,8 @@ class SessionViewModel: ObservableObject {
         session.end = endDate
         session.activityType = selectedActivity
         session.isCreditHour = isCreditHour
+        session.creditMinutes = Int64(isCreditHour ? counter : 0)
+        session.assignmentTag = assignmentTag.isEmpty ? nil : assignmentTag
         session.companion = selectedCompanion
         session.notes = notes.isEmpty ? nil : notes
 
