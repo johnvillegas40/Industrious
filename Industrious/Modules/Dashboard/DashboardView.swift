@@ -68,6 +68,13 @@ struct DashboardView: View {
             weekly.append(DailyStat(date: day, value: count))
         }
         weeklySessions = weekly
+
+        let goalRequest: NSFetchRequest<Goal> = Goal.fetchRequest()
+        if let goals = try? context.fetch(goalRequest) {
+            for goal in goals {
+                NotificationManager.shared.nudgeIfOffPace(goal: goal)
+            }
+        }
     }
 }
 

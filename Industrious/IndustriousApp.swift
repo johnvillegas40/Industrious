@@ -12,6 +12,10 @@ import CoreData
 struct IndustriousApp: App {
     let persistenceController = PersistenceController.shared
 
+    init() {
+        NotificationManager.shared.requestPermissions()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
