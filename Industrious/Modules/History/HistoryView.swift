@@ -6,16 +6,23 @@ struct HistoryView: View {
     @State private var totals: [MonthKey: Int64] = [:]
 
     var body: some View {
-        List(sortedKeys, id: \.self) { key in
-            HStack {
-                Text("\(monthName(key.month)) \(key.year)")
-                Spacer()
-                Text("\(totals[key] ?? 0)")
+        NavigationStack {
+            List(sortedKeys, id: \.self) { key in
+                NavigationLink {
+                    MonthDetailView(month: key.month, year: key.year)
+                } label: {
+                    HStack {
+                        Text("\(monthName(key.month)) \(key.year)")
+                        Spacer()
+                        Text("\(totals[key] ?? 0)")
+                    }
+                }
             }
+            .listStyle(.plain)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(AppColor.background)
+            .navigationTitle("History")
         }
-        .listStyle(.plain)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(AppColor.background)
         .onAppear(perform: load)
     }
 
