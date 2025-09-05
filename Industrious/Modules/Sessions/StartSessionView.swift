@@ -1,18 +1,52 @@
 import SwiftUI
 import CoreData
+import UIKit
 
 struct StartSessionView: View {
     @StateObject private var viewModel: SessionViewModel
     @Environment(\.managedObjectContext) private var context
+    @Environment(\.undoManager) private var undoManager
     @State private var showingStudyPicker = false
 
     init(study: Study? = nil) {
         _viewModel = StateObject(wrappedValue: SessionViewModel(study: study))
     }
 
+    private func undoBinding<T>(_ keyPath: ReferenceWritableKeyPath<SessionViewModel, T>) -> Binding<T> {
+        Binding(
+            get: { viewModel[keyPath: keyPath] },
+            set: { newValue in
+                let oldValue = viewModel[keyPath: keyPath]
+                viewModel[keyPath: keyPath] = newValue
+                undoManager?.registerUndo(withTarget: viewModel) { vm in
+                    vm[keyPath: keyPath] = oldValue
+                }
+            }
+        )
+    }
+
+    private func incrementCounter() {
+        let oldValue = viewModel.counter
+        viewModel.counter += 1
+        undoManager?.registerUndo(withTarget: viewModel) { vm in
+            vm.counter = oldValue
+        }
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    }
+
+    private func decrementCounter() {
+        guard viewModel.counter > 0 else { return }
+        let oldValue = viewModel.counter
+        viewModel.counter -= 1
+        undoManager?.registerUndo(withTarget: viewModel) { vm in
+            vm.counter = oldValue
+        }
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    }
+
     var body: some View {
         VStack(spacing: Spacing.l) {
-            Picker("Role", selection: $viewModel.selectedRole) {
+            Picker("Role", selection: undoBinding(\.selectedRole)) {
                 ForEach(Role.allCases, id: \.self) { role in
                     Text(role.displayName).tag(role)
                 }
@@ -21,20 +55,24 @@ struct StartSessionView: View {
             .padding(.horizontal, Spacing.m)
 
             if viewModel.selectedRole.allowsCredit {
-                Toggle("Credit Hour", isOn: $viewModel.isCreditHour)
+                Toggle("Credit Hour", isOn: undoBinding(\.isCreditHour))
                     .padding(.horizontal, Spacing.m)
 
                 if viewModel.isCreditHour {
                     HStack(spacing: Spacing.l) {
-                        Button(action: { if viewModel.counter > 0 { viewModel.counter -= 1 } }) {
+                        Button(action: decrementCounter) {
                             Image(systemName: "minus.circle.fill")
                                 .font(.largeTitle)
+                                .frame(width: 44, height: 44)
+                                .accessibilityLabel("Decrease credit minutes")
                         }
                         Text("\(viewModel.counter)")
                             .font(Typography.heading(36))
-                        Button(action: { viewModel.counter += 1 }) {
+                        Button(action: incrementCounter) {
                             Image(systemName: "plus.circle.fill")
                                 .font(.largeTitle)
+                                .frame(width: 44, height: 44)
+                                .accessibilityLabel("Increase credit minutes")
                         }
                     }
                     .padding(Spacing.m)
@@ -46,7 +84,7 @@ struct StartSessionView: View {
                             .padding(.horizontal, Spacing.m)
                     }
 
-                    TextField("Assignment Tag", text: $viewModel.assignmentTag)
+                    TextField("Assignment Tag", text: undoBinding(\.assignmentTag))
                         .textFieldStyle(.roundedBorder)
                         .padding(.horizontal, Spacing.m)
                 }
@@ -54,18 +92,28 @@ struct StartSessionView: View {
 
             HStack {
                 ForEach(ActivityType.allCases, id: \.self) { type in
-                    Text(label(for: type))
-                        .font(Typography.caption())
-                        .padding(.horizontal, Spacing.m)
-                        .padding(.vertical, Spacing.s)
-                        .background(viewModel.selectedActivity == type ? AppColor.primary : AppColor.secondary.opacity(0.3))
-                        .foregroundStyle(viewModel.selectedActivity == type ? Color.white : AppColor.textPrimary)
-                        .clipShape(Capsule())
-                        .onTapGesture { viewModel.selectedActivity = type }
+                    Button(action: {
+                        let oldValue = viewModel.selectedActivity
+                        viewModel.selectedActivity = type
+                        undoManager?.registerUndo(withTarget: viewModel) { vm in
+                            vm.selectedActivity = oldValue
+                        }
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    }) {
+                        Text(label(for: type))
+                            .font(Typography.caption())
+                            .padding(.horizontal, Spacing.m)
+                            .padding(.vertical, Spacing.s)
+                            .frame(minWidth: 44, minHeight: 44)
+                            .background(viewModel.selectedActivity == type ? AppColor.primary : AppColor.secondary.opacity(0.3))
+                            .foregroundStyle(viewModel.selectedActivity == type ? Color.white : AppColor.textPrimary)
+                            .clipShape(Capsule())
+                    }
+                    .accessibilityLabel(label(for: type))
                 }
             }
 
-            Picker("Companion", selection: $viewModel.selectedCompanion) {
+            Picker("Companion", selection: undoBinding(\.selectedCompanion)) {
                 ForEach(CompanionType.allCases, id: \.self) { companion in
                     Text(label(for: companion)).tag(companion)
                 }
@@ -82,13 +130,14 @@ struct StartSessionView: View {
                         .foregroundStyle(AppColor.secondary)
                 }
                 .padding(.horizontal, Spacing.m)
+                .frame(minHeight: 44)
             }
             .sheet(isPresented: $showingStudyPicker) {
-                StudyPicker(selection: $viewModel.selectedStudy)
+                StudyPicker(selection: undoBinding(\.selectedStudy))
                     .environment(\.managedObjectContext, context)
             }
 
-            TextField("Notes", text: $viewModel.notes, axis: .vertical)
+            TextField("Notes", text: undoBinding(\.notes), axis: .vertical)
                 .textFieldStyle(.roundedBorder)
                 .padding(.horizontal, Spacing.m)
 
@@ -102,13 +151,15 @@ struct StartSessionView: View {
                 } else {
                     viewModel.start()
                 }
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, minHeight: 44)
             .padding()
             .background(AppColor.primary)
             .foregroundColor(.white)
             .cornerRadius(8)
             .padding(.horizontal, Spacing.m)
+            .accessibilityLabel(viewModel.isRunning ? "Stop session" : "Start session")
         }
         .padding(.vertical, Spacing.l)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
