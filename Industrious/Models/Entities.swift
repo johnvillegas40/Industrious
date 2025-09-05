@@ -55,6 +55,7 @@ public class Study: NSManagedObject {
     @NSManaged public var id: UUID
     @NSManaged public var title: String
     @NSManaged public var sessions: Set<Session>?
+    @NSManaged public var nextVisit: Date?
 
     public var sessionsArray: [Session] {
         sessions?.sorted { $0.start < $1.start } ?? []
