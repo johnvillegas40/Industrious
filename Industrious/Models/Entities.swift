@@ -10,6 +10,8 @@ public class Session: NSManagedObject {
     @NSManaged public var isCreditHour: Bool
     @NSManaged public var companionRaw: String
     @NSManaged public var notes: String?
+    @NSManaged public var creditMinutes: Int64
+    @NSManaged public var assignmentTag: String?
     @NSManaged public var study: Study?
 
     public var activityType: ActivityType {
@@ -69,6 +71,7 @@ extension Study {
 public class DayOff: NSManagedObject {
     @NSManaged public var id: UUID
     @NSManaged public var date: Date
+    @NSManaged public var isConvention: Bool
 }
 
 extension DayOff {

@@ -19,3 +19,32 @@ enum CompanionType: String, CaseIterable, Codable {
     case group
 }
 
+enum Role: String, CaseIterable, Codable {
+    case publisher
+    case pioneer
+
+    var displayName: String {
+        switch self {
+        case .publisher: "Publisher"
+        case .pioneer: "Pioneer"
+        }
+    }
+
+    var creditAllowance: Int {
+        switch self {
+        case .publisher: 0
+        case .pioneer: 60
+        }
+    }
+
+    var dayOffAllowance: Int {
+        switch self {
+        case .publisher: 0
+        case .pioneer: 3
+        }
+    }
+
+    var allowsCredit: Bool { creditAllowance > 0 }
+    var allowsDaysOff: Bool { dayOffAllowance > 0 }
+}
+
