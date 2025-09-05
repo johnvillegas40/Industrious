@@ -1,8 +1,14 @@
 import SwiftUI
+import CoreData
 
 struct StartSessionView: View {
-    @StateObject private var viewModel = SessionViewModel()
+    @StateObject private var viewModel: SessionViewModel
     @Environment(\.managedObjectContext) private var context
+    @State private var showingStudyPicker = false
+
+    init(study: Study? = nil) {
+        _viewModel = StateObject(wrappedValue: SessionViewModel(study: study))
+    }
 
     var body: some View {
         VStack(spacing: Spacing.l) {
@@ -66,6 +72,21 @@ struct StartSessionView: View {
             }
             .pickerStyle(.segmented)
             .padding(.horizontal, Spacing.m)
+
+            Button(action: { showingStudyPicker = true }) {
+                HStack {
+                    Text(viewModel.selectedStudy?.title ?? "Select Study")
+                        .foregroundStyle(AppColor.textPrimary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(AppColor.secondary)
+                }
+                .padding(.horizontal, Spacing.m)
+            }
+            .sheet(isPresented: $showingStudyPicker) {
+                StudyPicker(selection: $viewModel.selectedStudy)
+                    .environment(\.managedObjectContext, context)
+            }
 
             TextField("Notes", text: $viewModel.notes, axis: .vertical)
                 .textFieldStyle(.roundedBorder)

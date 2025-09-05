@@ -24,6 +24,7 @@
     <entity name="Study" representedClassName="Study" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="NO" attributeType="String" usesScalarValueType="NO"/>
+        <attribute name="nextVisit" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="study" inverseEntity="Session"/>
     </entity>
     <entity name="DayOff" representedClassName="DayOff" syncable="YES" codeGenerationType="class">

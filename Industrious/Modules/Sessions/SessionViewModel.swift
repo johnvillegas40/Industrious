@@ -12,9 +12,14 @@ class SessionViewModel: ObservableObject {
     @Published var elapsed: TimeInterval = 0
     @Published var isRunning: Bool = false
     @Published var counter: Int = 0
+    @Published var selectedStudy: Study?
 
     private var timer: Timer?
     private var startDate: Date?
+
+    init(study: Study? = nil) {
+        self.selectedStudy = study
+    }
 
     func start() {
         startDate = Date()
@@ -42,6 +47,7 @@ class SessionViewModel: ObservableObject {
         session.assignmentTag = assignmentTag.isEmpty ? nil : assignmentTag
         session.companion = selectedCompanion
         session.notes = notes.isEmpty ? nil : notes
+        session.study = selectedStudy
 
         do {
             try context.save()
