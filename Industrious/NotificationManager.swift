@@ -20,6 +20,20 @@ class NotificationManager {
             center.add(request)
         }
     }
+
+    func schedule(session: PlannedSession) {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+            guard granted else { return }
+            let content = UNMutableNotificationContent()
+            content.title = "Planned Session"
+            content.body = session.activity.rawValue.capitalized
+            let comps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: session.start)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+            let request = UNNotificationRequest(identifier: session.id.uuidString, content: content, trigger: trigger)
+            center.add(request)
+        }
+    }
 }
 
 extension Study {

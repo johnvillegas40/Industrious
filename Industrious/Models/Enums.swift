@@ -13,6 +13,12 @@ enum CounterKind: String, CaseIterable, Codable {
     case goal
 }
 
+enum GoalPeriod: String, CaseIterable, Codable {
+    case weekly
+    case monthly
+    case counter
+}
+
 enum CompanionType: String, CaseIterable, Codable {
     case solo
     case friend

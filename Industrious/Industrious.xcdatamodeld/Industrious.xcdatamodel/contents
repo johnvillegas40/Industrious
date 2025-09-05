@@ -36,6 +36,8 @@
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="NO" attributeType="String" usesScalarValueType="NO"/>
         <attribute name="target" optional="NO" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="periodRaw" optional="NO" attributeType="String" usesScalarValueType="NO"/>
+        <attribute name="progress" optional="NO" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Preference" representedClassName="Preference" syncable="YES" codeGenerationType="class">
         <attribute name="key" optional="NO" attributeType="String" usesScalarValueType="NO"/>

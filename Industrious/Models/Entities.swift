@@ -86,6 +86,13 @@ public class Goal: NSManagedObject {
     @NSManaged public var id: UUID
     @NSManaged public var title: String
     @NSManaged public var target: Double
+    @NSManaged public var periodRaw: String
+    @NSManaged public var progress: Double
+
+    public var period: GoalPeriod {
+        get { GoalPeriod(rawValue: periodRaw) ?? .weekly }
+        set { periodRaw = newValue.rawValue }
+    }
 }
 
 extension Goal {
