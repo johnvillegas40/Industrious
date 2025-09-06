@@ -1,6 +1,5 @@
 import SwiftUI
-import CoreData
-
+@_implementationOnly import CoreData
 struct CounterControlsView: View {
     @Environment(\.managedObjectContext) private var context
     let kind: CounterKind

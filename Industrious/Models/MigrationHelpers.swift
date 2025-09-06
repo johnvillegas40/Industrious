@@ -1,6 +1,5 @@
 import Foundation
-import CoreData
-
+@_implementationOnly import CoreData
 struct MigrationHelper {
     static func migrateLegacyItems(context: NSManagedObjectContext) throws {
         let request = NSFetchRequest<NSManagedObject>(entityName: "Item")

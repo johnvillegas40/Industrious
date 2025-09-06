@@ -1,6 +1,5 @@
 import SwiftUI
-import CoreData
-
+@_implementationOnly import CoreData
 struct DashboardView: View {
     @Environment(\.managedObjectContext) private var context
     @State private var totals: [CounterKind: Int64] = [:]

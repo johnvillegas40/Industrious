@@ -1,7 +1,6 @@
 import Testing
 @testable import Industrious
-import CoreData
-
+@_implementationOnly import CoreData
 struct AggregationTests {
     @MainActor
     @Test func sessionDurationsByMonth() async throws {

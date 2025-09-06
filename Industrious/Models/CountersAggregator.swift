@@ -1,6 +1,5 @@
 import Foundation
-import CoreData
-
+@_implementationOnly import CoreData
 struct CountersAggregator {
     static func monthlyTotals(context: NSManagedObjectContext, kind: CounterKind? = nil) throws -> [MonthKey: Int64] {
         let request: NSFetchRequest<CounterEntry> = CounterEntry.fetchRequest()

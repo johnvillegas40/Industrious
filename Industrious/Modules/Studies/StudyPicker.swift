@@ -1,6 +1,5 @@
 import SwiftUI
-import CoreData
-
+@_implementationOnly import CoreData
 struct StudyPicker: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Study.title, ascending: true)])
     private var studies: FetchedResults<Study>

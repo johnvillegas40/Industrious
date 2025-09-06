@@ -1,6 +1,5 @@
 import Foundation
-import CoreData
-
+@_implementationOnly import CoreData
 struct MonthKey: Hashable {
     let year: Int
     let month: Int
