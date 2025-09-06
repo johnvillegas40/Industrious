@@ -13,7 +13,7 @@
         <attribute name="notes" optional="YES" attributeType="String" usesScalarValueType="NO"/>
         <attribute name="creditMinutes" optional="NO" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="assignmentTag" optional="YES" attributeType="String" usesScalarValueType="NO"/>
-        <relationship name="study" optional="YES" toMany="NO" deletionRule="Nullify" destinationEntity="Study" inverseName="sessions" inverseEntity="Study"/>
+        <relationship name="studies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Study" inverseName="sessions" inverseEntity="Study"/>
     </entity>
     <entity name="CounterEntry" representedClassName="CounterEntry" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
@@ -25,7 +25,7 @@
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="NO" attributeType="String" usesScalarValueType="NO"/>
         <attribute name="nextVisit" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="study" inverseEntity="Session"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="studies" inverseEntity="Session"/>
     </entity>
     <entity name="DayOff" representedClassName="DayOff" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
