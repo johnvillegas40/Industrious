@@ -1,5 +1,5 @@
 import SwiftUI
-import CoreData
+@_implementationOnly import CoreData
 import UserNotifications
 
 struct StudyDetailView: View {

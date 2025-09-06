@@ -1,6 +1,5 @@
 import Foundation
-import CoreData
-
+@_implementationOnly import CoreData
 struct SampleData {
     @discardableResult
     static func insertSampleData(context: NSManagedObjectContext) -> ([Session], [CounterEntry]) {

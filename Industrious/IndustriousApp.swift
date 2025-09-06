@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-import CoreData
-
+@_implementationOnly import CoreData
 @main
 struct IndustriousApp: App {
     let persistenceController = PersistenceController.shared

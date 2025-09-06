@@ -1,6 +1,5 @@
 import Foundation
-import CoreData
-
+@_implementationOnly import CoreData
 @objc(Session)
 public class Session: NSManagedObject {
     @NSManaged public var id: UUID

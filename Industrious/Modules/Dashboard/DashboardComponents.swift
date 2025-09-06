@@ -1,6 +1,6 @@
 import SwiftUI
 import Charts
-import CoreData
+@_implementationOnly import CoreData
 
 struct DailyStat: Identifiable {
     let id = UUID()

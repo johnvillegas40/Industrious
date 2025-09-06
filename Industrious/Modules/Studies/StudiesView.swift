@@ -1,6 +1,5 @@
 import SwiftUI
-import CoreData
-
+@_implementationOnly import CoreData
 struct StudiesView: View {
     @Environment(\.managedObjectContext) private var context
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Study.title, ascending: true)])

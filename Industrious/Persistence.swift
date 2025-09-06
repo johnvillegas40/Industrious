@@ -4,9 +4,7 @@
 //
 //  Created by Johnny Villegas on 9/3/25.
 //
-
-import CoreData
-
+@_implementationOnly import CoreData
 struct PersistenceController {
     static let shared = PersistenceController()
 

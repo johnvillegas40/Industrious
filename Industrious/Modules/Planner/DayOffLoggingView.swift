@@ -1,6 +1,5 @@
 import SwiftUI
-import CoreData
-
+@_implementationOnly import CoreData
 struct DayOffLoggingView: View {
     @Environment(\.managedObjectContext) private var context
     @FetchRequest(

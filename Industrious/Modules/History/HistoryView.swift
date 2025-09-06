@@ -1,6 +1,5 @@
 import SwiftUI
-import CoreData
-
+@_implementationOnly import CoreData
 struct HistoryView: View {
     @Environment(\.managedObjectContext) private var context
     @State private var totals: [MonthKey: Int64] = [:]

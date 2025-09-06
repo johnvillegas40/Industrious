@@ -1,6 +1,5 @@
 import Foundation
-import CoreData
-
+@_implementationOnly import CoreData
 @MainActor
 class SessionViewModel: ObservableObject {
     @Published var selectedActivity: ActivityType = .study
