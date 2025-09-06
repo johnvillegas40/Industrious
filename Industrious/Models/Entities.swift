@@ -12,7 +12,7 @@ public class Session: NSManagedObject {
     @NSManaged public var notes: String?
     @NSManaged public var creditMinutes: Int64
     @NSManaged public var assignmentTag: String?
-    @NSManaged public var study: Study?
+    @NSManaged public var studies: Set<Study>?
 
     public var activityType: ActivityType {
         get { ActivityType(rawValue: activityTypeRaw) ?? .study }

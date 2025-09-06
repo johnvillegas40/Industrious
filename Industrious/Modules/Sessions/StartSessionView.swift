@@ -9,7 +9,8 @@ struct StartSessionView: View {
     @State private var showingStudyPicker = false
 
     init(study: Study? = nil) {
-        _viewModel = StateObject(wrappedValue: SessionViewModel(study: study))
+        let initialStudies = study.map { Set([$0]) } ?? []
+        _viewModel = StateObject(wrappedValue: SessionViewModel(studies: initialStudies))
     }
 
     private func undoBinding<T>(_ keyPath: ReferenceWritableKeyPath<SessionViewModel, T>) -> Binding<T> {
@@ -123,7 +124,7 @@ struct StartSessionView: View {
 
             Button(action: { showingStudyPicker = true }) {
                 HStack {
-                    Text(viewModel.selectedStudy?.title ?? "Select Study")
+                    Text(viewModel.selectedStudies.isEmpty ? "Select Studies" : viewModel.selectedStudies.map { $0.title }.sorted().joined(separator: ", "))
                         .foregroundStyle(AppColor.textPrimary)
                     Spacer()
                     Image(systemName: "chevron.right")
@@ -133,7 +134,7 @@ struct StartSessionView: View {
                 .frame(minHeight: 44)
             }
             .sheet(isPresented: $showingStudyPicker) {
-                StudyPicker(selection: undoBinding(\.selectedStudy))
+                StudyPicker(selection: undoBinding(\.selectedStudies))
                     .environment(\.managedObjectContext, context)
             }
 
