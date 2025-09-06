@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="manual">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <entity name="Session" representedClassName="Session" syncable="YES" codeGenerationType="class">
+    <entity name="Session" representedClassName="Session" syncable="YES" codeGenerationType="manual">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="start" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="end" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
@@ -15,31 +15,31 @@
         <attribute name="assignmentTag" optional="YES" attributeType="String" usesScalarValueType="NO"/>
         <relationship name="studies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Study" inverseName="sessions" inverseEntity="Study"/>
     </entity>
-    <entity name="CounterEntry" representedClassName="CounterEntry" syncable="YES" codeGenerationType="class">
+    <entity name="CounterEntry" representedClassName="CounterEntry" syncable="YES" codeGenerationType="manual">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="date" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="kindRaw" optional="NO" attributeType="String" usesScalarValueType="NO"/>
         <attribute name="value" optional="NO" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Study" representedClassName="Study" syncable="YES" codeGenerationType="class">
+    <entity name="Study" representedClassName="Study" syncable="YES" codeGenerationType="manual">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="NO" attributeType="String" usesScalarValueType="NO"/>
         <attribute name="nextVisit" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="studies" inverseEntity="Session"/>
     </entity>
-    <entity name="DayOff" representedClassName="DayOff" syncable="YES" codeGenerationType="class">
+    <entity name="DayOff" representedClassName="DayOff" syncable="YES" codeGenerationType="manual">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="date" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isConvention" optional="NO" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="class">
+    <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="manual">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="NO" attributeType="String" usesScalarValueType="NO"/>
         <attribute name="target" optional="NO" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="periodRaw" optional="NO" attributeType="String" usesScalarValueType="NO"/>
         <attribute name="progress" optional="NO" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Preference" representedClassName="Preference" syncable="YES" codeGenerationType="class">
+    <entity name="Preference" representedClassName="Preference" syncable="YES" codeGenerationType="manual">
         <attribute name="key" optional="NO" attributeType="String" usesScalarValueType="NO"/>
         <attribute name="value" optional="YES" attributeType="String" usesScalarValueType="NO"/>
     </entity>
