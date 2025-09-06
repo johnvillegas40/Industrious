@@ -23,12 +23,38 @@ final class IndustriousUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testSessionFlow() throws {
         let app = XCUIApplication()
         app.launch()
+        app.tabBars.buttons["Sessions"].tap()
+        app.buttons["Start Session"].tap()
+        app.buttons["Start"].tap()
+        app.buttons["Stop"].tap()
+    }
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    @MainActor
+    func testPlannerNavigation() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars.buttons["Planner"].tap()
+        XCTAssertTrue(app.navigationBars["Planner"].exists)
+    }
+
+    @MainActor
+    func testExportFlow() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars.buttons["History"].tap()
+        app.cells.element(boundBy: 0).tap()
+        app.buttons["Export CSV"].tap()
+    }
+
+    @MainActor
+    func testSettingsNavigation() throws {
+        let app = XCUIApplication()
+        app.launch()
+        app.tabBars.buttons["Settings"].tap()
+        XCTAssertTrue(app.navigationBars["Settings"].exists)
     }
 
     @MainActor

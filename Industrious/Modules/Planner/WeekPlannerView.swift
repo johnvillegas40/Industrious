@@ -1,9 +1,13 @@
 import SwiftUI
 
 struct WeekPlannerView: View {
-    @State private var sessions: [PlannedSession] = []
+    @State private var sessions: [PlannedSession]
     @State private var isAdding = false
     @State private var newDate = Date()
+
+    init(sessions: [PlannedSession] = []) {
+        _sessions = State(initialValue: sessions)
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -90,6 +94,6 @@ struct AddSessionView: View {
 
 #Preview {
     NavigationStack {
-        WeekPlannerView()
+        WeekPlannerView(sessions: SampleData.plannedSessions)
     }
 }

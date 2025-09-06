@@ -14,26 +14,7 @@ struct PersistenceController {
     static let preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let session = Session(context: viewContext)
-            session.id = UUID()
-            session.start = Date()
-            session.end = Date()
-            session.activityType = .study
-            session.isCreditHour = false
-            session.companion = .solo
-            session.notes = ""
-            session.creditMinutes = 0
-            session.assignmentTag = nil
-        }
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        SampleData.seedPreview(context: viewContext)
         return result
     }()
 
