@@ -124,7 +124,9 @@
 		643301D002F0457A803D6F90 /* Models/Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/Enums.swift; sourceTree = "<group>"; };
 		6C7A143DBC634C23BE5EDAA5 /* Models/Aggregation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/Aggregation.swift; sourceTree = "<group>"; };
 		7118730417AF499E89BB3AC0 /* Shared/DesignSystem/Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/DesignSystem/Spacing.swift; sourceTree = "<group>"; };
-		722BEDDAA16E43DFBF7D2642 /* Industrious.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Industrious.xcdatamodeld; sourceTree = "<group>"; };
+
+               63B0FF99CFC6433B9207C897 /* Industrious.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Industrious.xcdatamodel; sourceTree = "<group>"; };
+
 		74C16644BBC242619B37CF62 /* Modules/Planner/DayOffLoggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modules/Planner/DayOffLoggingView.swift; sourceTree = "<group>"; };
 		7C73CDF0C0004DE3A04B68C8 /* Modules/Dashboard/DashboardComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modules/Dashboard/DashboardComponents.swift; sourceTree = "<group>"; };
 		84532B7560CD4F4386D384DF /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -468,6 +470,19 @@
 			targetProxy = EA0A54A92E69304700583DB9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin XCVersionGroup section */
+               722BEDDAA16E43DFBF7D2642 /* Industrious.xcdatamodeld */ = {
+                       isa = XCVersionGroup;
+                       children = (
+                               63B0FF99CFC6433B9207C897 /* Industrious.xcdatamodel */,
+                       );
+                       currentVersion = 63B0FF99CFC6433B9207C897 /* Industrious.xcdatamodel */;
+                       path = Industrious.xcdatamodeld;
+                       sourceTree = "<group>";
+                       versionGroupType = wrapper.xcdatamodeld;
+               };
+/* End XCVersionGroup section */
 
 /* Begin XCBuildConfiguration section */
 		EA0A54B02E69304700583DB9 /* Debug */ = {
