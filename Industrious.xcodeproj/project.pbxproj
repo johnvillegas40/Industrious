@@ -30,11 +30,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		EA0A548E2E69304500583DB9 /* Industrious */ = {
-			isa = PBXGroup;
-			path = Industrious;
-			sourceTree = "<group>";
-		};
+               EA0A548E2E69304500583DB9 /* Industrious */ = {
+                       isa = PBXFileSystemSynchronizedRootGroup;
+                       path = Industrious;
+                       sourceTree = "<group>";
+               };
 		EA0A54A12E69304700583DB9 /* IndustriousTests */ = {
 			isa = PBXGroup;
 			path = IndustriousTests;
